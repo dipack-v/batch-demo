@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import Person.Person;
-
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
 	private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);

@@ -23,8 +23,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import Person.Person;
-
 @SpringBootApplication
 public class BatchDemoApplication {
 
