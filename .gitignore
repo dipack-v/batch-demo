@@ -1,0 +1,8 @@
+/target/*
+/.mvn/*
+/.settings/*
+.project
+.classpath
+mvnw*
+/bin/
+/target/
