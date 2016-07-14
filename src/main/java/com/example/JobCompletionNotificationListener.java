@@ -17,11 +17,11 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 
 	private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-	private final JdbcTemplate jdbcTemplate;
+	private final CityCountryRepository cityCountryRepository;
 
 	@Autowired
-	public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-		this.jdbcTemplate = jdbcTemplate;
+	public JobCompletionNotificationListener(CityCountryRepository cityCountryRepository) {
+		this.cityCountryRepository = cityCountryRepository;
 	}
 
 	@Override
@@ -29,15 +29,16 @@ public class JobCompletionNotificationListener extends JobExecutionListenerSuppo
 		if(jobExecution.getStatus() == BatchStatus.COMPLETED) {
 			log.info("!!! JOB FINISHED! Time to verify the results");
 
-			List<Person> results = jdbcTemplate.query("SELECT first_name, last_name FROM people", new RowMapper<Person>() {
+			List<CityCountry> results = cityCountryRepository.findAll();
+			/*List<Place> results = jdbcTemplate.query("SELECT c.places FROM CityCountry c", new RowMapper<Place>() {
 				@Override
-				public Person mapRow(ResultSet rs, int row) throws SQLException {
-					return new Person(rs.getString(1), rs.getString(2));
+				public Place mapRow(ResultSet rs, int row) throws SQLException {
+					return (Place)rs.getObject(1);
 				}
-			});
+			});*/
 
-			for (Person person : results) {
-				log.info("Found <" + person + "> in the database.");
+			for (Place p : results.get(0).getPlaces()) {
+				log.info("Found <" + p + "> in the database.");
 			}
 
 		}
